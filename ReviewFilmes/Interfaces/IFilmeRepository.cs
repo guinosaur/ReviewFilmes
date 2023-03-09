@@ -6,7 +6,6 @@ namespace ReviewFilmes.Interfaces
     {
         ICollection<Filme> GetFilmes();
         Filme GetFilme(int id);
-        Filme GetFilme(string nome);
         decimal GetNotaFilme(int id);
         bool ExisteFilme(int id);
         bool ExisteFilme(string nome);

@@ -23,11 +23,6 @@ namespace ReviewFilmes.Repositories
             return _context.Filmes.Where(f => f.Id == id).FirstOrDefault();
         }
 
-        public Filme GetFilme(string nome)
-        {
-            return _context.Filmes.Where(f => f.Nome == nome).FirstOrDefault();
-        }
-
         public decimal GetNotaFilme(int id)
         {
             var review = _context.Reviews.Where(r => r.FilmeId == id).ToList();

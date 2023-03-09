@@ -40,7 +40,7 @@ namespace ReviewFilmes.Controllers
         [ProducesResponseType(400)]
         public IActionResult GetFilme(int filmeId)
         {
-            if (_filmeRepository.ExisteFilme(filmeId))
+            if (!_filmeRepository.ExisteFilme(filmeId))
                 return NotFound();
             
             var filme = _mapper.Map<FilmeDto>(_filmeRepository.GetFilme(filmeId));
@@ -50,23 +50,6 @@ namespace ReviewFilmes.Controllers
 
             return Ok(filme);
         }
-
-        [HttpGet("{filmeNome}")]
-        [ProducesResponseType(200, Type = typeof(Filme))]
-        [ProducesResponseType(400)]
-        public IActionResult GetFilme(string filmeNome)
-        {
-            if (_filmeRepository.ExisteFilme(filmeNome))
-                return NotFound();
-
-            var filme = _mapper.Map<FilmeDto>(_filmeRepository.GetFilme(filmeNome));
-
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            return Ok(filme);
-        }
-
 
         [HttpGet("{filmeId}/Nota")]
         [ProducesResponseType(200, Type = typeof(decimal))]
@@ -93,7 +76,7 @@ namespace ReviewFilmes.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             
-            if(_filmeRepository.CreateFilme(nome, genero))
+            if(!_filmeRepository.CreateFilme(nome, genero))
             {
                 return BadRequest(ModelState);
             }
